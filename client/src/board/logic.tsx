@@ -54,6 +54,17 @@ function calculateScore (board : Array<any>, depth: number) : number {
     return 0;
 }
 
+const getAvailableMoves = (board : Board) => {
+    const moves = board.map((_ : CellVal, idx : number) => {
+        if (board[idx] == '') {
+            return idx
+        }
+    })
+
+    return moves
+
+}
+
 const minimax = ( board : Board, depth :number, alpha : number, beta: number, maximizingPlayer : boolean )=> {
     if (depth ==0 || evaluate_state(board)) 
         return evaluate_state(board)

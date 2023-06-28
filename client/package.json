@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "homepage": "https://edcrux.github.io/tic-tac-toe-ex",
+  "homepage": "https://edcrux.github.io/TicTacToeExoal/",
   "version": "0.0.1",
   "type": "module",
   "scripts": {

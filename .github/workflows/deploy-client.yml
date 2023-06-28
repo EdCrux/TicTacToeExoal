@@ -1,4 +1,4 @@
-name: Deploy react Tic-tac-toe application
+name: Deploy Tic-tac-toe application.
 on:
     push:
         branches: [main]
@@ -7,34 +7,48 @@ on:
         branches: [main]
         #paths: ['client/**']
 
+concurrency:
+    group: "pages"
+    cancel-in-progress: false
+
 jobs:
-    build_test:
+    # Single deploy job since we're just deploying
+    deploy:
         runs-on: ubuntu-latest
         env:
             working-directory: ./client
-
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
         strategy:
-            matrix: 
+            matrix:
                 node-version: [18.x]
-
         steps:
-            -   uses: actions/checkout@v2
+            -   name: Checkout
+                uses: actions/checkout@v3
+
             -   name: Use Node.js ${{ matrix.node-version }}
                 uses: actions/setup-node@v2
                 with:
                     node-version: ${{ matrix.node-version }}
-
+            
             -   name: npm ci, build and test
                 working-directory: ${{ env.working-directory }}
 
                 run: |
                     npm ci 
-                    npm run build --if-present
+                    npm run build
                     npm test
 
-            -   name: Deploy to gh-pages
-                uses: peaceiris/actions-gh-pages@v3
+            -   name: Setup Pages
+                uses: actions/configure-pages@v3
 
+            -   name: Upload artifact
+                uses: actions/upload-pages-artifact@v1
                 with:
-                    deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-                    publish_dir: ./client/dist/**        
+                    # Upload entire repository
+                    path: ".client/dist/**"
+
+            -   name: Deploy to GitHub Pages
+                id: deployment
+                uses: actions/deploy-pages@v2

@@ -20,7 +20,7 @@ export type WinningInfo = {
     }
 }
 
-export type Board = Player[]
+export type Board = Player[] | string[]
 
 
 

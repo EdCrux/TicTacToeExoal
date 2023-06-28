@@ -39,14 +39,17 @@ function useBoard () {
         
         if (player === Player.O && !winner) {
             console.log('turn of the computer')
-            const bestMove = logic.getBestMove(board, player)
-            console.log(bestMove)
-            // if (gameWon) {
-            //     setWinner(gameWon)
-            // }
+            const bestMove = logic.makeMove(board, player)
+            if (bestMove) {
+                console.log('the best move from the computer is', bestMove)
+                const updatedBoard = [...board]
+                updatedBoard[bestMove] = Player.O
+                setBoard(updatedBoard)
+                setPlayer(Player.X)
+            }
         }
 
-    }, [player])
+    }, [board])
 
     return {
         player,

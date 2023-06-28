@@ -6,7 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+tic-tac-toe-ex
+tic-tac-toe-ex.pub
 node_modules
 dist
 dist-ssr

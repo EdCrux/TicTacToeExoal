@@ -1,18 +1,5 @@
 import './Board.css';
-import { Player } from './customTypes';
-
-
-type CellProps = {
-    table: Array<Player | null>
-    onClickCell : any,
-    indexTable : number 
-}
-
-type BoardProps = {
-    table: Array<Player | null>
-    onClickCell : any,
-    player : Player | null  
-}
+import { CellProps, BoardProps } from './model';
 
 const Cell = ({ table, onClickCell, indexTable  } : CellProps) => {
     return (
@@ -24,7 +11,6 @@ const Cell = ({ table, onClickCell, indexTable  } : CellProps) => {
         </div>
     )
 }
-
 
 const Board = ({ table, onClickCell } : BoardProps) => {
     return (

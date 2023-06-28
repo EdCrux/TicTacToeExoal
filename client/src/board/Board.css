@@ -21,8 +21,8 @@
     justify-content: center;
     min-width: 100%;
     min-height: 5rem;
-    box-shadow:   -5px 0 0 0 rgb(1, 255, 208),
-                   5px 0 0 0 rgb(1, 255, 208),
-                   0 -5px 0 0 rgb(1, 255, 208),
-                   0 5px 0 0 rgb(1, 255, 208);
+    box-shadow:    -5px 0 0 0 rgb(1, 255, 208),
+                    5px 0 0 0 rgb(1, 255, 208),
+                    0 -5px 0 0 rgb(1, 255, 208),
+                    0 5px 0 0 rgb(1, 255, 208);
 }

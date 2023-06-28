@@ -1,6 +1,6 @@
-import logic from '../board/logic'
+import logic from './logic'
 import { useEffect, useState } from "react";
-import { Player } from "../board/customTypes";
+import { Player } from "./model";
 
 // Constants.
 const ROWS_COLUMNS_SIZE : number = 4;

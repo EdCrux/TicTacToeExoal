@@ -1,4 +1,4 @@
-import { WinnablePosition, Player, CellVal, Board } from './customTypes';
+import { WinnablePosition, Player, CellVal, Board } from './model';
 const MAX_DEPTH = 8;
 const WINNING_COMBINATIONS : WinnablePosition[] = [
     [0, 5, 10, 15],
@@ -70,7 +70,7 @@ function evaluateState (board : Board ) : number {
         [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15],
         // Diag
         [0, 5, 10, 15], [3, 6, 9, 12]
-      ];
+    ];
     
     for (const line of lines) {
         const [a, b, c, d] = line;
@@ -79,10 +79,10 @@ function evaluateState (board : Board ) : number {
         const oCount = lineValues.filter(value => value === 'O').length;
     
         if (xCount === 4) {
-          return 100; 
+            return 100; 
         }
         if (oCount === 4) {
-          return -100;
+            return -100;
         }
     }
 
@@ -146,8 +146,6 @@ function makeMove(board : Board, AIPlayer : Player) : number | null {
 
     let bestScore = -Infinity;
     let bestMove  : number | null = null;
-    const availableMoves = getAvailableMoves(board)
-    console.log(availableMoves)
     for (const move of getAvailableMoves(board)) {
         const newBoard : Board = [...board];
         newBoard[move] = AIPlayer;

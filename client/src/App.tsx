@@ -1,7 +1,7 @@
 
-import Board from './board'
+import Board from './board/view'
 import Visualizer from './visualizer/index';
-import useBoard from './hooks/useBoard';
+import useBoard from './board/controller';
 
 function App() {
 

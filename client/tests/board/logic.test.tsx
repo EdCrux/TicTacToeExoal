@@ -1,4 +1,4 @@
-import { Player } from "../../src/board/customTypes"
+import { Player } from "../../src/board/model"
 import logic from "../../src/board/logic"
 // 
 

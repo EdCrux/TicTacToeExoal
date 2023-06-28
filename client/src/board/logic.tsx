@@ -49,17 +49,17 @@ function checkWinner (
  * @returns 
  */
 
-function evaluateState2( board : Board) : number | null {
-    if (checkWinner(board,Player.X)) {
-        return -100
-    } else if (checkWinner(board, Player.O)) {
-        return 100
-    } else if (getAvailableMoves(board).length === 0) {
-        return 0;
-    }
+// function evaluateState2( board : Board) : number | null {
+//     if (checkWinner(board,Player.X)) {
+//         return -100
+//     } else if (checkWinner(board, Player.O)) {
+//         return 100
+//     } else if (getAvailableMoves(board).length === 0) {
+//         return 0;
+//     }
 
-    return null
-}
+//     return null
+// }
 
 function evaluateState (board : Board ) : number {
     if (!board) return 0

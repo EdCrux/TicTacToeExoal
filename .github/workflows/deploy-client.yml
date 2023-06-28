@@ -43,6 +43,7 @@ jobs:
                     npm run build
                     npm test
             -   name: Deploy
+                working-directory: ${{ env.working-directory }}
                 run: |
                     git config --global user.name 'EdCrux'
                     git config --global user.email 'jecruxiz@gmail.com'

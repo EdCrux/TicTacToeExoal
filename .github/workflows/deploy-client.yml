@@ -2,10 +2,10 @@ name: Deploy Tic-tac-toe application.
 on:
     push:
         branches: [main]
-        #paths: ['client/**']
+        paths: ['client/**']
     pull_request:
         branches: [main]
-        #paths: ['client/**']
+        paths: ['client/**']
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

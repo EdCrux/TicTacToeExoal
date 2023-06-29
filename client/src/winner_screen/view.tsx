@@ -1,8 +1,15 @@
 
 
+import { Player } from '../board/model'
 import './winnerScreen.css'
 
-const VictoryScreen = ({ winPlayer, onClickReplay }) => {
+type VictoryScreenProps = {
+    winPlayer : Player,
+    onClickReplay : any
+}
+
+const VictoryScreen = (
+    { winPlayer, onClickReplay } : VictoryScreenProps) => {
     return(
         <article className="VictoryScreen">
             <div className="VictoryScreen-box bg-cyan-950">

@@ -1,6 +1,5 @@
 import { WinnablePosition, Player, CellVal, Board } from './model';
-const print = console.log
-const MAX_DEPTH = 8;
+// const MAX_DEPTH = 8;
 const WINNING_COMBINATIONS : WinnablePosition[] = [
     [0, 5, 10, 15],
     [0, 4, 8,  12],
@@ -53,7 +52,7 @@ function checkNWinner (
  */
 function checkWinner (board : Board ) : Player | null {
 
-    if (!board) return Player.default
+    if (!board) return null
     const lines = [
         // Rows
         [0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15],
@@ -96,88 +95,21 @@ const getAvailableMoves = (board : Board) : Array<number> => {
     return moves
 
 }
-// const minimax = ( 
-//     board : Board,
-//     idx   : number,
-//     depth : number, 
-//     alpha : number, 
-//     beta  : number, 
-//     isMax : boolean ) => {
-//     console.log(board)
-//     const best = {
-//         score : isMax ? -Infinity : Infinity,
-//         idx   : idx
-//     }
-
-//     const player = isMax ? Player.X : Player.O;
-//     if (player === Player.X && checkWinner(board, player)) {
-//         console.log('Maximizin')
-//         return {
-//             score : 100,
-//             idx : idx
-//         }
-
-//     } else if (player == Player.O && checkWinner(board, player)) {
-//         console.log('HERE')
-//         return {
-//             score: -100, 
-//             idx: idx 
-//         }
-
-//     } else if (getAvailableMoves(board).length === 0) {
-//         return {
-//             score: 0,
-//             idx: idx
-//         }
-//     }
-//     if (depth === 0) {
-//         return best;
-//     }
-
-//     for (const idx of getAvailableMoves(board)) {
-//         const val = board[idx]
-//         if (val !== '') continue;
-//         const newBoard = [...board] 
-//         newBoard[idx] = player
-//         const { score } = minimax(newBoard, idx, depth - 1, alpha, beta, !isMax)
-//         newBoard[idx] = ''
-//         if (isMax) {
-
-//             best.score = Math.max(best.score, score)
-//             best.idx = idx
-//             alpha = Math.max(alpha, best.score)
-//             if (beta <= alpha) break
-//         } else {
-//             best.score = Math.min(best.score, score)
-//             best.idx = idx
-//             beta = Math.min(beta, best.score)
-//             if (beta <= alpha) break
-//         }
-//     }
-
-//     return best
-// }
-
-// function makeMove(board : Board, idx : number, isComputer : boolean) : number {
-//     const move = minimax(board, idx, MAX_DEPTH, -Infinity, Infinity, isComputer)
-//     console.log(move)
-//     return move.idx
-// }
-
-
-let scores = {
-    [Player.X]   : -1,
-    [Player.O]:  1,
-    [Player.tie] :  0,
-}
-
 
 function minimax (board : Board, depth : number, isMax : boolean) {
 
     let winner : Player | null = checkWinner(board)
-    if (winner !== null) {
-        // print('Does someone wins',winner)
-        return scores[winner]
+
+    if (winner === Player.X) {
+        return -1
+    } else if (winner === Player.O) {
+        return 1
+    } else if (getAvailableMoves(board).length === 0) {
+        return 0
+    } 
+    
+    if (depth === 8) {
+        return -1
     }
 
     if (isMax) {
@@ -229,6 +161,7 @@ function bestMove(board : Board) {
 
 export default {
     WINNING_COMBINATIONS,
+    checkNWinner,
     checkWinner,
     getAvailableMoves,
     minimax,

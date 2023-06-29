@@ -14,13 +14,13 @@ export type Board = Player[] | string[]
 
 
 export type CellProps = {
-    table: Array<Player | null>
+    table: Board
     onClickCell : any,
     indexTable : number 
 }
 
 export type BoardProps = {
-    table: Array<Player | null>
+    table: Board
     onClickCell : any,
     player : Player | null  
 }

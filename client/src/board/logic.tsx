@@ -52,7 +52,7 @@ function checkNWinner (
  */
 function checkWinner (board : Board ) : Player | null {
 
-    if (!board) return null
+    if (board.length === 0) return null
     const lines = [
         // Rows
         [0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15],

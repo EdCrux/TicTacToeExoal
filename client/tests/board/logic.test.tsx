@@ -6,7 +6,7 @@ describe('checkWinner', () => {
 
     test('Normal arguments negative case', () => {
         const board = new Array(16).fill('')
-        expect(logic.checkWinner(board, Player.X)).toBe(null)
+        expect(logic.checkWinner(board)).toBe(null)
     })
 
     test('Normal arguments positive case', () => {
@@ -14,11 +14,11 @@ describe('checkWinner', () => {
         logic.WINNING_COMBINATIONS[0].forEach((cellIdx) => {
             board[cellIdx] = Player.X
         })
-        expect(logic.checkWinner(board, Player.X)).toBe(Player.X)
+        expect(logic.checkWinner(board)).toBe(Player.X)
     })
 
     test('Bad arguments', () => {
-        expect(logic.checkWinner([], Player.X)).toBe(null)
+        expect(logic.checkWinner([])).toBe(null)
     })
 
 })

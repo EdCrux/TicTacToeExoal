@@ -1,5 +1,6 @@
 import { Player } from '../board/model'
 import './visualizer.css'
+
 //import characters from '../assets/characters.png';
 
 type VisualizerProps = {
@@ -21,7 +22,7 @@ const Visualizer = ({ player } : VisualizerProps) => {
             >Turn of: 
                 <span 
                     className={player === 'X' ? `text-amber-400` : `text-sky-50` }> 
-                {player}</span>
+                    {player}</span>
         </h1>
 
         

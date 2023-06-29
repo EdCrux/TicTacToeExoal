@@ -23,48 +23,6 @@ describe('checkWinner', () => {
 
 })
 
-describe('evaluateState', ()=> {
-
-    test('Bad arguments', () => {
-        expect(logic.evaluateState([])).toBe(0)
-    })
-
-    test('Normal arguments, negative case', () => {
-
-        const board = [
-            'X', '',  '', '',  
-            'X', 'O', '', '',  
-            'X', '',  '', '', 
-            'O', '',  '', ''
-        ]
-        expect(logic.evaluateState(board)).toBe(0)
-
-    })
-
-    test('Normal arguments, X wins. case', () => {
-
-        const board = [
-            '', '',  '', 'X',  
-            '', 'O', 'X', '',  
-            '', 'X',  '', '', 
-            'X', '',  '', ''
-        ]
-        expect(logic.evaluateState(board)).toBe(100)
-
-    })
-
-    test('Normal arguments, tie case.', () => {
-
-        const board = [
-            'O', 'O',  'X', 'X',  
-            'X', 'O',  'X', 'O',  
-            'O', 'X',  'O', 'X', 
-            'O', 'X',  'O', 'X'
-        ]
-        expect(logic.evaluateState(board)).toBe(0)
-
-    })
-})
 
 
 

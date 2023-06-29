@@ -2,6 +2,7 @@
 import Board from './board/view'
 import Visualizer from './visualizer/index';
 import useBoard from './board/controller';
+import { VictoryScreen } from './winner_screen/view';
 
 function App() {
 
@@ -9,24 +10,16 @@ function App() {
     player,
     board,
     winner,
-    onClickCell
+    onClickCell,
+    onClickReplay
   } = useBoard()
 
   return (
     <div className="bg-cyan-950 h-[150vh]">
-    {winner && <h1 className={`transition-all
-                duration-700
-                ease-in-out
-                pt-10
-                lg:pl-4
-                lg:pt-10
-                text-amber-400 
-                font-mono
-                text-center
-                lg:text-start
-                text-3xl 
-                font-bold
-                `}>{winner} you win! </h1>}
+    {winner && <VictoryScreen 
+                  winPlayer={winner} 
+                  onClickReplay={ onClickReplay }
+                />}
 
     <h1 className={`
                 transition-all
@@ -61,7 +54,7 @@ function App() {
       <div className='lg:float-right w-12/12 lg:w-6/12' >
         <Visualizer player={player} />
       </div>
-
+      
     </div>
     
     </div>

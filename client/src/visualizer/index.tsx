@@ -6,7 +6,6 @@ import './visualizer.css'
 type VisualizerProps = {
     player : Player
 }
-
 const Visualizer = ({ player } : VisualizerProps) => {
 
     return (<>
@@ -25,7 +24,7 @@ const Visualizer = ({ player } : VisualizerProps) => {
                     {player}</span>
         </h1>
 
-        
+        <div id="game-container"></div>        
     </>)
 }
 

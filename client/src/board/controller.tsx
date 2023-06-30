@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Board, Player } from "./model";
 
 // Constants.
-const ROWS_COLUMNS_SIZE : number = 4;
+const ROWS_COLUMNS_SIZE : number = logic.BOARD_LEN_SIZE;
 const cellsCount = () => Math.pow(ROWS_COLUMNS_SIZE, 2)
 const emptyBoard : Array<Player> = new Array(cellsCount()).fill(Player.default)
 //const emptyBoard : Array<Player | number> = Array.from(Array(cellsCount()).keys())
@@ -35,20 +35,20 @@ function useBoard () {
             setTimeout(() => setBoard(newBoard), 400)
             setPlayer(currentplayer === Player.X ? Player.O : Player.X)
         }
-
-
     };
 
     const aiMove = (
             prevBoard : Board, 
-                prevPlayer : Player
+                humanPlayer : Player
         ) : [Board, Player] =>  {
         
-            const currentplayer = prevPlayer === Player.X ? Player.O : Player.X
-        const newIdx = logic.bestMove(prevBoard)
+        const aiPlayer = humanPlayer === Player.X ? Player.O : Player.X
+        const { idx, score } = logic.minimax([...prevBoard], aiPlayer, 0, true)
+        console.log('the next move', idx, score)
         const newBoard = [...prevBoard]
-        newBoard[newIdx] = currentplayer
-        return [newBoard, currentplayer]
+        newBoard[idx] = aiPlayer
+        console.log(newBoard)
+        return [newBoard, aiPlayer]
     }
 
     const startGame = () => {

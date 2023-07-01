@@ -1,4 +1,4 @@
-
+ 
 
 import { Player } from '../board/model'
 import './winnerScreen.css'

@@ -125,7 +125,7 @@ function aiMove ( board : Board, player : Player) {
     
     const availMoves = getAvailableMoves(board)
     if (availMoves.length > 11) {
-        console.log('Random choice  ')
+        // console.log('Random choice  ')
         let random = Math.floor(Math.random()*availMoves.length);
         return { idx : random, score : -1 }
     }
@@ -171,7 +171,7 @@ function minimax  (
     //     'isMax', isMax,
     //     'depth', depth
     // )
-    console.log('currentidx', idx,'board', prepare_printing_board(board))
+    // console.log('currentidx', idx,'board', prepare_printing_board(board))
 
     const winner = checkWinner(board)
 
@@ -201,10 +201,11 @@ function minimax  (
                 bestResult.idx = idx
             }
 
-            alpha = Math.max(result.score, alpha)
-            if (beta <= alpha) {
-                break;
-            }
+                alpha = Math.max(result.score, alpha)
+                if (beta <= alpha) {
+                    break;
+                }
+            
         }
         return bestResult
     } else {

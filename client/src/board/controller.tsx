@@ -1,6 +1,7 @@
 import logic from './logic'
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Board, Player } from "./model";
+
 
 // Constants.
 const ROWS_COLUMNS_SIZE : number = logic.BOARD_LEN_SIZE;
@@ -16,15 +17,15 @@ function useBoard () {
 
     const onClickReplay = () => {
         startGame()
+        history.go(0)
     }
 
-    const onClickCell = (index : number) : void => {
+    const onClickCell = useCallback((index : number) : void => {
 
         if (board[index] === '' && !winner) {
             const updated = [...board]
             updated[index] = player;
             const aWinner = logic.checkWinner(updated)
-            console.log('The winner',aWinner)
             if (aWinner) {
                 setWinner(aWinner)
                 return 
@@ -32,17 +33,20 @@ function useBoard () {
             setBoard(updated);
             setTimeout(() =>{
                 const [newBoard, currentplayer] = aiMove(updated, player)
-                setBoard(newBoard)  
+                setBoard(prev => {
+                    console.log(prev.length, newBoard.length)
+                    return newBoard
+                })  
                 const aWinner2 = logic.checkWinner(newBoard)
                 if (aWinner2) {
                     setWinner(aWinner2)
                     return 
                 }
                 setPlayer(currentplayer === Player.X ? Player.O : Player.X)
-            } , 400)
+            } , 100)
 
         }
-    };
+    }, [board])
 
     const aiMove = (
             prevBoard : Board, 
@@ -53,8 +57,9 @@ function useBoard () {
         
         const { idx } = logic.aiMove([...prevBoard], aiPlayer)
         // console.log('the next move', idx, score)
+        console.log('The idx is: ', idx)
         const newBoard = [...prevBoard]
-        newBoard[idx] = aiPlayer
+        if (typeof idx === 'number') newBoard[idx] = aiPlayer
         return [newBoard, aiPlayer]
     }
 

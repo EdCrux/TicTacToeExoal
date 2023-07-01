@@ -7,7 +7,7 @@ export const print_boards = (boards : Array<string>) => {
     })
 }
 
-export const prepare_printing_board = ( board : Board, depth: number=0) : any =>{
+export const prepare_printing_board = ( board : Board, _: number=0) : any =>{
 
     if (board.length === 9) {
         const a = `

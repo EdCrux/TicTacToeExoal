@@ -43,7 +43,7 @@ function useBoard () {
                     return 
                 }
                 setPlayer(currentplayer === Player.X ? Player.O : Player.X)
-            } , 100)
+            } , 0)
 
         }
     }, [board])

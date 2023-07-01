@@ -180,11 +180,13 @@ function minimax  (
     ) {
         //console.log('MAX_DEPHT REACHED', winner ,'the score',scoreMove(board))
         const score = scoreMove(board)
+        // @ts-expect-error
         return { score, idx}
     }
     
     if  (winner) {
         const score = scoreMove(board)
+        // @ts-expect-error
         return { score, idx }
     }
 
@@ -196,11 +198,12 @@ function minimax  (
     if (isMax) { 
         for (const [possibleBoard, idx] of generateSuccesors([...board], player)) {
             const result = minimax(possibleBoard, Player.X, idx, false,  depth + 1, alpha, beta)
+            // @ts-expect-error
             if (result.score > bestResult.score) {
                 bestResult.score = result.score
                 bestResult.idx = idx
             }
-
+            // @ts-expect-error
                 alpha = Math.max(result.score, alpha)
                 if (beta <= alpha) {
                     break;
@@ -211,11 +214,12 @@ function minimax  (
     } else {
         for (const [possibleBoard, idx] of generateSuccesors([...board], player)) {
             const result = minimax(possibleBoard, Player.O, idx, true, depth + 1, alpha, beta)
+            // @ts-expect-error
             if (result.score < bestResult.score) {
                 bestResult.score = result.score
                 bestResult.idx = idx
             }
-
+            // @ts-expect-error
             beta = Math.min(result.score, beta)
             if (beta <= alpha) {
                 break

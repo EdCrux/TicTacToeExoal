@@ -1,8 +1,8 @@
 import { Player, CellVal, Board } from './model';
 import { prepare_printing_board } from './visualizer';
 
-const MAX_DEPTH = 8;
-const BOARD_LEN_SIZE = 3;
+const MAX_DEPTH = 5;
+const BOARD_LEN_SIZE = 4;
 type Move = {
     idx? : number,
     score? : number
@@ -121,28 +121,73 @@ const checkWinner = (board : Board, board_len_size : number = BOARD_LEN_SIZE) : 
 }
 
 
+function aiMove ( board : Board, player : Player) {
+    
+    const availMoves = getAvailableMoves(board)
+    if (availMoves.length > 11) {
+        console.log('Random choice  ')
+        let random = Math.floor(Math.random()*availMoves.length);
+        return { idx : random, score : -1 }
+    }
+
+    return minimax(
+        board, 
+        player, 
+        0, 
+        true, 
+        0,
+        -Infinity,
+        Infinity
+    )
+
+
+} 
+
+/**
+ * Punto B
+ * @param board 
+ * @param player 
+ * @param idx 
+ * @param isMax 
+ * @param depth 
+ * @param alpha 
+ * @param beta 
+ * @returns 
+ */
 function minimax  (
     board : Board, 
     player : Player,
     idx : number,
     isMax : boolean, 
-    depth : number = 0
+    depth : number,
+    alpha : number,
+    beta : number
 ) : Move {
 
-    console.log(
-        'board',board, 
-        'player', player, 
-        'idx',idx,
-        'isMax', isMax,
-        'depth', depth
-    )
-    //console.log('currentidx', idx,'board', prepare_printing_board(board))
+    // console.log(
+    //     'board',board, 
+    //     'player', player, 
+    //     'idx',idx,
+    //     'isMax', isMax,
+    //     'depth', depth
+    // )
+    console.log('currentidx', idx,'board', prepare_printing_board(board))
+
     const winner = checkWinner(board)
+
+    if (
+        depth === MAX_DEPTH
+    ) {
+        //console.log('MAX_DEPHT REACHED', winner ,'the score',scoreMove(board))
+        const score = scoreMove(board)
+        return { score, idx}
+    }
+    
     if  (winner) {
         const score = scoreMove(board)
-        console.log('the score of ', winner, 'is',score)
         return { score, idx }
     }
+
     let bestResult : Move = {
         idx : idx,
         score : (isMax) ? -Infinity : Infinity
@@ -150,21 +195,29 @@ function minimax  (
 
     if (isMax) { 
         for (const [possibleBoard, idx] of generateSuccesors([...board], player)) {
-            const result = minimax(possibleBoard, Player.X, idx, false,  depth + 1)
+            const result = minimax(possibleBoard, Player.X, idx, false,  depth + 1, alpha, beta)
             if (result.score > bestResult.score) {
                 bestResult.score = result.score
                 bestResult.idx = idx
+            }
+
+            alpha = Math.max(result.score, alpha)
+            if (beta <= alpha) {
+                break;
             }
         }
         return bestResult
     } else {
         for (const [possibleBoard, idx] of generateSuccesors([...board], player)) {
-            const result = minimax(possibleBoard, Player.O, 
-                //alpha, beta, 
-                idx, true, depth + 1)
+            const result = minimax(possibleBoard, Player.O, idx, true, depth + 1, alpha, beta)
             if (result.score < bestResult.score) {
                 bestResult.score = result.score
                 bestResult.idx = idx
+            }
+
+            beta = Math.min(result.score, beta)
+            if (beta <= alpha) {
+                break
             }
         }
         return bestResult
@@ -177,5 +230,6 @@ export default {
     checkWinner,
     getAvailableMoves,
     generateSuccesors,
-    scoreMove
+    scoreMove,
+    aiMove
 }

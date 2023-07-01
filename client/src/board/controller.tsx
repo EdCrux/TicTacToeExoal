@@ -51,17 +51,10 @@ function useBoard () {
         
         const aiPlayer = humanPlayer === Player.X ? Player.O : Player.X
         
-        const { idx, score } = logic.minimax(
-            [...prevBoard], 
-            aiPlayer, 
-            0, 
-            true, 
-            0
-        )
-        console.log('the next move', idx, score)
+        const { idx } = logic.aiMove([...prevBoard], aiPlayer)
+        // console.log('the next move', idx, score)
         const newBoard = [...prevBoard]
         newBoard[idx] = aiPlayer
-        console.log(newBoard)
         return [newBoard, aiPlayer]
     }
 

@@ -122,13 +122,6 @@ const checkWinner = (board : Board, board_len_size : number = BOARD_LEN_SIZE) : 
 
 
 function aiMove ( board : Board, player : Player) {
-    
-    const availMoves = getAvailableMoves(board)
-    if (availMoves.length > 11) {
-        // console.log('Random choice  ')
-        let random = Math.floor(Math.random()*availMoves.length);
-        return { idx : random, score : -1 }
-    }
 
     return minimax(
         board, 

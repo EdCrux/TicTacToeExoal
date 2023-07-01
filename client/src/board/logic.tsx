@@ -1,8 +1,12 @@
-import { WinnablePosition, Player, CellVal, Board } from './model';
-import { prepare_printing_board, print_boards } from './visualizer';
+import { Player, CellVal, Board } from './model';
+import { prepare_printing_board } from './visualizer';
 
 const MAX_DEPTH = 8;
 const BOARD_LEN_SIZE = 3;
+type Move = {
+    idx? : number,
+    score? : number
+}
 
 const getWinningCombos = ( boardLenSide : number ) => {
 
@@ -43,37 +47,6 @@ const getWinningCombos = ( boardLenSide : number ) => {
     }
 
     return lines
-}
-
-/**
- * Defines the goal state.
- * @param board 
- * @param depth 
- * @returns 
- */
-function checkWinner (board : Board, board_len_size : number = BOARD_LEN_SIZE) : Player | null {
-
-    if (board.length === 0) return null
-    const lines = getWinningCombos(board_len_size)
-
-    for (const line of lines) {
-        const [a, b, c, d] = line;
-        const lineValues = [board[a], board[b], board[c], board[d]];
-        const xCount = lineValues.filter(value => value === Player.X).length;
-        const oCount = lineValues.filter(value => value === Player.O).length;
-        if (xCount === board_len_size) {
-            return Player.X 
-        }
-
-        if (oCount === board_len_size) {
-            return Player.O
-        }
-    }
-
-    const availableMoves = getAvailableMoves(board).length
-    if (availableMoves === 0) return Player.tie
-
-    return null;
 }
 
 const getAvailableMoves = (board : Board) : Array<number> => {
@@ -122,61 +95,69 @@ const scoreMove = (board : Board) =>  {
     return null
 }
 
+const checkWinner = (board : Board, board_len_size : number = BOARD_LEN_SIZE) : Player | null => {
 
-type Move = {
-    idx? : number,
-    score? : number
+    if (board.length === 0) return null
+    const lines = getWinningCombos(board_len_size)
+
+    for (const line of lines) {
+        const [a, b, c, d] = line;
+        const lineValues = [board[a], board[b], board[c], board[d]];
+        const xCount = lineValues.filter(value => value === Player.X).length;
+        const oCount = lineValues.filter(value => value === Player.O).length;
+        if (xCount === board_len_size) {
+            return Player.X 
+        }
+
+        if (oCount === board_len_size) {
+            return Player.O
+        }
+    }
+
+    const availableMoves = getAvailableMoves(board).length
+    if (availableMoves === 0) return Player.tie
+
+    return null;
 }
 
-const minimax = (
-    board : Board, 
-        player : Player,
-            // alpha = -Infinity,
-            // beta = Infinity,
-            idx : number = 0,
-                isMax : boolean = false, 
-            depth : number = 0) => {
 
-    console.log('currentidx', idx,'board', prepare_printing_board(board))
+function minimax  (
+    board : Board, 
+    player : Player,
+    idx : number,
+    isMax : boolean, 
+    depth : number = 0
+) : Move {
+
+    console.log(
+        'board',board, 
+        'player', player, 
+        'idx',idx,
+        'isMax', isMax,
+        'depth', depth
+    )
+    //console.log('currentidx', idx,'board', prepare_printing_board(board))
     const winner = checkWinner(board)
     if  (winner) {
         const score = scoreMove(board)
         console.log('the score of ', winner, 'is',score)
         return { score, idx }
     }
-
+    let bestResult : Move = {
+        idx : idx,
+        score : (isMax) ? -Infinity : Infinity
+    }
 
     if (isMax) { 
-        let bestResult : Move = {
-            idx : idx,
-            score : -Infinity
-        }
-
         for (const [possibleBoard, idx] of generateSuccesors([...board], player)) {
-            const result = minimax(
-                possibleBoard, 
-                Player.X, 
-                //alpha, beta, 
-                idx, false,  depth + 1)
+            const result = minimax(possibleBoard, Player.X, idx, false,  depth + 1)
             if (result.score > bestResult.score) {
                 bestResult.score = result.score
                 bestResult.idx = idx
             }
-
-            /* alpha = Math.max(result.score, alpha)
-            if (beta <= alpha) {
-                break;
-            } */
         }
-
         return bestResult
     } else {
-
-        let bestResult : Move = {
-            idx : idx,
-            score : Infinity
-        }
-
         for (const [possibleBoard, idx] of generateSuccesors([...board], player)) {
             const result = minimax(possibleBoard, Player.O, 
                 //alpha, beta, 
@@ -185,17 +166,9 @@ const minimax = (
                 bestResult.score = result.score
                 bestResult.idx = idx
             }
-
-            /* beta = Math.min(result.score, beta)
-            if (beta <= alpha) {
-                break;
-            } */
         }
         return bestResult
-
     }
-
-    
 }
 
 export default {

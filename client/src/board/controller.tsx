@@ -20,7 +20,6 @@ function useBoard () {
 
     const onClickCell = (index : number) : void => {
 
-
         if (board[index] === '' && !winner) {
             const updated = [...board]
             updated[index] = player;
@@ -31,9 +30,17 @@ function useBoard () {
                 return 
             }
             setBoard(updated);
-            const [newBoard, currentplayer] = aiMove(updated, player)
-            setTimeout(() => setBoard(newBoard), 400)
-            setPlayer(currentplayer === Player.X ? Player.O : Player.X)
+            setTimeout(() =>{
+                const [newBoard, currentplayer] = aiMove(updated, player)
+                setBoard(newBoard)  
+                const aWinner2 = logic.checkWinner(newBoard)
+                if (aWinner2) {
+                    setWinner(aWinner2)
+                    return 
+                }
+                setPlayer(currentplayer === Player.X ? Player.O : Player.X)
+            } , 400)
+
         }
     };
 
@@ -43,7 +50,14 @@ function useBoard () {
         ) : [Board, Player] =>  {
         
         const aiPlayer = humanPlayer === Player.X ? Player.O : Player.X
-        const { idx, score } = logic.minimax([...prevBoard], aiPlayer, 0, true)
+        
+        const { idx, score } = logic.minimax(
+            [...prevBoard], 
+            aiPlayer, 
+            0, 
+            true, 
+            0
+        )
         console.log('the next move', idx, score)
         const newBoard = [...prevBoard]
         newBoard[idx] = aiPlayer

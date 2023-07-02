@@ -1,12 +1,7 @@
-import { Player, CellVal, Board } from './model';
+import { Player, CellVal, Board, MAX_DEPTH, BOARD_LEN_SIZE, Move } from './model';
 import { prepare_printing_board } from './visualizer';
 
-const MAX_DEPTH = 5;
-const BOARD_LEN_SIZE = 4;
-type Move = {
-    idx? : number,
-    score? : number
-}
+
 
 const getWinningCombos = ( boardLenSide : number ) => {
 

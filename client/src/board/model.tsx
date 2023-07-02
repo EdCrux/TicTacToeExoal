@@ -27,3 +27,10 @@ export type BoardProps = {
 
 
 
+export const MAX_DEPTH = 5;
+export const BOARD_LEN_SIZE = 4;
+export type Move = {
+    idx? : number,
+    score? : number
+}
+

@@ -14,6 +14,7 @@ function useBoard () {
     const [player, setPlayer] = useState(Player.X);
     const [board, setBoard] = useState<Board>(emptyBoard);
     const [winner, setWinner] = useState<Player | null>(Player.default)
+    const [availMoves, setAvailMoves] = useState<number[]>([])
 
     const onClickReplay = () => {
         startGame()
@@ -31,6 +32,7 @@ function useBoard () {
                 return 
             }
             setBoard(updated);
+            setAvailMoves(logic.getAvailableMoves(updated))
             setTimeout(() =>{
                 const [newBoard, currentplayer] = aiMove(updated, player)
                 setBoard(prev => {
@@ -42,8 +44,9 @@ function useBoard () {
                     setWinner(aWinner2)
                     return 
                 }
+                setAvailMoves(logic.getAvailableMoves(updated))
                 setPlayer(currentplayer === Player.X ? Player.O : Player.X)
-            } , 0)
+            } , 400)
 
         }
     }, [board])
@@ -78,6 +81,7 @@ function useBoard () {
         player,
         board,
         winner,
+        availMoves,
         onClickCell,
         onClickReplay
     } 

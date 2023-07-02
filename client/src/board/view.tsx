@@ -7,7 +7,16 @@ const Cell = ({ table, onClickCell, indexTable  } : CellProps) => {
         <div 
             onClick={() => 
             onClickCell(indexTable)} 
-            className="cell flex items-center justify-center ">
+            className="
+                cell 
+                flex 
+                items-center 
+                justify-center 
+                hover:bg-cyan-700 
+                hover:cursor-pointer                 
+                transition-all
+                duration-200
+                ease-in-out">
                 {table[indexTable]}
         </div>
     )
@@ -17,7 +26,7 @@ const Cell = ({ table, onClickCell, indexTable  } : CellProps) => {
 const Board = ({ table, onClickCell } : BoardProps) => {
     return (
         <>
-        <div className='flex flex-col lg:flex-row w-full'>
+        <div className='flex flex-col  lg:flex-row'>
         <section 
             style={{    
                 display: 'grid',
@@ -28,8 +37,12 @@ const Board = ({ table, onClickCell } : BoardProps) => {
             className={`
                 board
                 font-mono
-                text-5xl 
-                h-[60vh] md:h-[80vh] lg:h-[80vh] 
+                text-5xl
+                w-[90vw]
+                md:w-[100vw]
+                h-[60vh] 
+                md:h-[80vh] 
+                lg:h-[80vh] 
                 `}>
 
             {

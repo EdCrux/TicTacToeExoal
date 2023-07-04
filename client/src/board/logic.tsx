@@ -62,20 +62,20 @@ const generateSuccesors = ( board : Board, player : Player)  : Array<any> => {
     const availMoves = getAvailableMoves(board)
     
     // Remember an index represents a possible move.
-    const possibleMoves : Array<any> = []
+    const boardsCreated : Array<any> = []
     const possibleMovesRepr : Array<any> = []
 
     availMoves.forEach((idx : number )=> {
         const new_board = [...board]
         new_board[idx] = player
         possibleMovesRepr.push(prepare_printing_board(new_board))
-        possibleMoves.push([new_board, idx])
+        boardsCreated.push([new_board, idx])
     })
 
 
 
     // print_boards(possibleMovesRepr)
-    return possibleMoves
+    return boardsCreated
 }
 
 const scoreMove = (board : Board) =>  {

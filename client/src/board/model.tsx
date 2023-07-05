@@ -16,13 +16,15 @@ export type Board = Player[] | string[]
 export type CellProps = {
     table: Board
     onClickCell : any,
-    indexTable : number 
+    indexTable : number,
+    disabled? : boolean
 }
 
 export type BoardProps = {
     table: Board
     onClickCell : any,
-    player : Player | null  
+    player : Player | null ,
+    disabled? : boolean
 }
 
 

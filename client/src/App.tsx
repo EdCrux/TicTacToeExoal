@@ -10,6 +10,7 @@ function App() {
         player,
         board,
         winner,
+        disable,
         onClickCell,
         onClickReplay
     } = useBoard()
@@ -39,6 +40,9 @@ function App() {
                     font-bold
                     lg:text-start
                     lg:pl-4
+
+                    dark:text-slate-100
+                    text-slate-800
                     `
                 }>
                     Tic-tac-toe
@@ -52,6 +56,7 @@ function App() {
                     <Board
                         table={board}
                         player={player}
+                        disabled={disable}
                         onClickCell={onClickCell}
                     />
                 </div>

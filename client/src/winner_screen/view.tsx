@@ -14,18 +14,33 @@ const VictoryScreen = (
         <article className="VictoryScreen">
             <div className="
                 VictoryScreen-box 
-                dark:bg-gradient-to-r from-slate-800 to-slate-900 ">
+                dark:bg-gradient-to-r from-slate-800 to-slate-900
+                bg-gradient-to-r from-slate-200 to-slate-300
+                ">
                 <h2 
                     className="
                         VictoryScreen-title 
-                        mt-6 text-2xl lg:text-5xl">{winPlayer === Player.tie ? '    ': 'Winner:'}</h2>
-                <p className="VictoryScreen-player text-5xl">{winPlayer}</p>
+                        mt-6 
+                        text-2xl
+                        text-slate-800
+                        dark:bg-white-100
+                        text-3xl
+                        lg:text-5xl">{winPlayer !== Player.tie && 'Winner:'} &nbsp;</h2>
+                <p className="
+                    VictoryScreen-player 
+                    text-slate-800 
+                    text-5xl
+                    font-mono
+                ">{winPlayer}</p>
                 <button 
                     onClick={onClickReplay} 
                     className="
-                        VictoryScreen-replay 
+                        VictoryScreen-replay
+                        text-gray-100
                         bg-gradient-to-r from-cyan-500 to-blue-500
+                        hover:bg-red-400
                         min-w-[100px]
+                        font-mono
                         text-lg">Replay</button>
             </div>
         </article>

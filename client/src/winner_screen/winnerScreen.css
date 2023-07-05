@@ -8,13 +8,11 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: 'Silkscreen', cursive;
     height: 100vh;
 }
 
 .VictoryScreen-box {
     border: solid 4px rgb(56 189 248);
-    color: rgba(254, 255, 255, 0.795);
     width: 60%;
     max-width: 400px;
     min-height: 300px;
@@ -28,16 +26,10 @@
 }
 
 .VictoryScreen-replay {
-    color: rgba(254, 255, 255, 0.795);
     border: none;
     width: 40%;
     height: 6vh;
     border-radius: 15px;
     font-size: 2rem;
     
-}
-
-.VictoryScreen-replay:hover {
-    background-color: #07cfb8;
-    color: #877d07;
 }

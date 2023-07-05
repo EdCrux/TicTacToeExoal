@@ -15,10 +15,11 @@ function useBoard () {
     const [board, setBoard] = useState<Board>(emptyBoard);
     const [winner, setWinner] = useState<Player | null>(Player.default)
     const [availMoves, setAvailMoves] = useState<number[]>([])
+    const [disable, setDisable] = useState<boolean>(false)
 
     const onClickReplay = () => {
         startGame()
-        history.go(0)
+        //history.go(0)
     }
 
     const onClickCell = useCallback((index : number) : void => {
@@ -31,22 +32,22 @@ function useBoard () {
                 setWinner(aWinner)
                 return 
             }
+            setDisable(true)
             setBoard(updated);
             setAvailMoves(logic.getAvailableMoves(updated))
             setTimeout(() =>{
+
                 const [newBoard, currentplayer] = aiMove(updated, player)
-                setBoard(prev => {
-                    console.log(prev.length, newBoard.length)
-                    return newBoard
-                })  
+                setBoard(newBoard)  
                 const aWinner2 = logic.checkWinner(newBoard)
                 if (aWinner2) {
                     setWinner(aWinner2)
                     return 
                 }
                 setAvailMoves(logic.getAvailableMoves(updated))
+                setDisable(false)
                 setPlayer(currentplayer === Player.X ? Player.O : Player.X)
-            } , 400)
+            } , 200)
 
         }
     }, [board])
@@ -60,7 +61,6 @@ function useBoard () {
         
         const { idx } = logic.aiMove([...prevBoard], aiPlayer)
         // console.log('the next move', idx, score)
-        console.log('The idx is: ', idx)
         const newBoard = [...prevBoard]
         if (typeof idx === 'number') newBoard[idx] = aiPlayer
         return [newBoard, aiPlayer]
@@ -70,6 +70,7 @@ function useBoard () {
         setPlayer(Player.X)
         setBoard(emptyBoard)
         setWinner(Player.default)
+        setDisable(false)
     }
 
     useEffect(() => {
@@ -81,6 +82,7 @@ function useBoard () {
         player,
         board,
         winner,
+        disable,
         availMoves,
         onClickCell,
         onClickReplay

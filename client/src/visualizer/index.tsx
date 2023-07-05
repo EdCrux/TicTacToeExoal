@@ -36,7 +36,7 @@ const Visualizer = ({ board, onClickReplay } : VisualizerProps) => {
             text-center
             p-2
             '>
-            <div className="border-b-2">
+            <div className="border-b-2 font-mono">
                 <h1>Player X</h1>
             </div>
             <div>
@@ -51,12 +51,15 @@ const Visualizer = ({ board, onClickReplay } : VisualizerProps) => {
             align-center 
             w-6/12
             text-center
+            dark:text-gray-100
+            text-gray-600
             p-2
         '>
-            <div className="border-b-2">
+            <div className="border-b-2 font-mono">
                 <h1>Player O</h1>
             </div>
-            <div className='text-gray-100'>
+            <div className='
+                dark:text-gray-100'>
                 <h2>{board.filter((cell : any) => cell === Player.O).length}</h2>
             </div>
         </div>
@@ -67,8 +70,12 @@ const Visualizer = ({ board, onClickReplay } : VisualizerProps) => {
                 onClick={onClickReplay} 
                 className="
                     bg-gradient-to-r from-cyan-500 to-blue-500 
-                    px-8 py-2 
-                    text-3xl text-gray-100 rounded-2xl">Replay</button>
+                    px-8 
+                    py-2 
+                    text-3xl 
+                    text-gray-100
+                    font-mono 
+                    rounded-2xl">Replay</button>
         </div>
         
         

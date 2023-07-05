@@ -2,9 +2,12 @@ import './Board.css';
 import { CellProps, BoardProps } from './model';
 import logic from './logic';
 
-const Cell = ({ table, onClickCell, indexTable  } : CellProps) => {
+const Cell = ({ table, onClickCell, indexTable, disabled  } : CellProps) => {
+    
+
     return (
-        <div 
+        <button
+            disabled={disabled}
             onClick={() => 
             onClickCell(indexTable)} 
             className="
@@ -12,18 +15,21 @@ const Cell = ({ table, onClickCell, indexTable  } : CellProps) => {
                 flex 
                 items-center 
                 justify-center 
-                hover:bg-cyan-700 
-                hover:cursor-pointer                 
+                dark:hover:bg-cyan-700
+                hover:bg-cyan-300
+                hover:cursor-pointer                
                 transition-all
+                text-slate-800
+                dark:text-gray-100
                 duration-200
                 ease-in-out">
                 {table[indexTable]}
-        </div>
+        </button>
     )
 }
 
 
-const Board = ({ table, onClickCell } : BoardProps) => {
+const Board = ({ table, disabled ,onClickCell } : BoardProps) => {
     return (
         <>
         <div className='flex flex-col  lg:flex-row'>
@@ -49,7 +55,8 @@ const Board = ({ table, onClickCell } : BoardProps) => {
                 table.map((_ : any, index : number) => {
                     return <Cell 
                             key={index} 
-                            table={table} 
+                            table={table}
+                            disabled={disabled}
                             onClickCell={onClickCell} 
                             indexTable={index}/>
             })}

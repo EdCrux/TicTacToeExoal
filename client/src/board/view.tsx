@@ -1,6 +1,6 @@
 import './Board.css';
-import { CellProps, BoardProps } from './model';
-import logic from './logic';
+import { CellProps, BoardProps } from '../engine/model';
+import logic from '../engine/logic';
 
 const Cell = ({ table, onClickCell, indexTable, disabled  } : CellProps) => {
     

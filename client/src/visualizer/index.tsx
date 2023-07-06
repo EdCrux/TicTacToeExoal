@@ -1,4 +1,4 @@
-import { Player } from '../board/model'
+import { Player } from '../engine/model'
 import './visualizer.css'
 
 //import characters from '../assets/characters.png';

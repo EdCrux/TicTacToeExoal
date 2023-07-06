@@ -1,5 +1,5 @@
 import { Player, CellVal, Board, MAX_DEPTH, BOARD_LEN_SIZE, Move } from './model';
-import { prepare_printing_board } from './visualizer';
+import { prepare_printing_board } from '../board/visualizer';
 
 
 

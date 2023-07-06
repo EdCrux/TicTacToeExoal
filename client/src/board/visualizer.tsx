@@ -1,4 +1,4 @@
-import { Board } from "./model"
+import { Board } from "../engine/model"
 
 
 export const print_boards = (boards : Array<string>) => {

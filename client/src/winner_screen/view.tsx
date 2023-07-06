@@ -1,6 +1,6 @@
  
 
-import { Player } from '../board/model'
+import { Player } from '../engine/model'
 import './winnerScreen.css'
 
 type VictoryScreenProps = {

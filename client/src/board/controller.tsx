@@ -1,6 +1,6 @@
-import logic from './logic'
+import logic from '../engine/logic'
 import { useCallback, useEffect, useState } from "react";
-import { Board, Player } from "./model";
+import { Board, Player } from "../engine/model";
 
 
 // Constants.

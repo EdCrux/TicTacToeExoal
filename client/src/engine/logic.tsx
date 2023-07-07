@@ -46,15 +46,17 @@ const getWinningCombos = ( boardLenSide : number ) => {
 
 const getAvailableMoves = (board : Board) : Array<number> => {
 
-    const moves : number[] = []
+    if (!board) return []
+
+    const availMoves : number[] = []
     
     board.forEach((_ : CellVal | string, idx : number) => {
         if (board[idx] === '') {
-            moves.push(idx)
+            availMoves.push(idx)
         }
     })
 
-    return moves
+    return availMoves
 
 }
 
@@ -127,7 +129,6 @@ function aiMove ( board : Board, player : Player) {
         -Infinity,
         Infinity
     )
-
 
 } 
 

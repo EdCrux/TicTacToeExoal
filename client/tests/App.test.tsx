@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/jest-dom'
 import App from "../src/App";
 import React from 'react'
 

@@ -1,4 +1,3 @@
- 
 
 import { Player } from '../engine/model'
 import './winnerScreen.css'

@@ -11,8 +11,8 @@ const emptyBoard : Array<Player> = new Array(cellsCount()).fill(Player.default)
 
 function useBoard () {
 
-    const [player, setPlayer] = useState(Player.X);
     const [board, setBoard] = useState<Board>(emptyBoard);
+    const [player, setPlayer] = useState(Player.X);
     const [winner, setWinner] = useState<Player | null>(Player.default)
     const [availMoves, setAvailMoves] = useState<number[]>([])
     const [disable, setDisable] = useState<boolean>(false)
@@ -36,7 +36,6 @@ function useBoard () {
             setBoard(updated);
             setAvailMoves(logic.getAvailableMoves(updated))
             setTimeout(() =>{
-                console.time("aiMove")
                 const [newBoard, currentplayer] = aiMove(updated, player)
                 setBoard(newBoard)  
                 const aWinner2 = logic.checkWinner(newBoard)
@@ -44,8 +43,6 @@ function useBoard () {
                     setWinner(aWinner2)
                     return 
                 }
-
-                console.timeEnd("aiMove")
                 setAvailMoves(logic.getAvailableMoves(updated))
                 setDisable(false)
                 setPlayer(currentplayer === Player.X ? Player.O : Player.X)

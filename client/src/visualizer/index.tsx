@@ -1,20 +1,14 @@
 import { Player } from '../engine/model'
 import './visualizer.css'
 
-//import characters from '../assets/characters.png';
-
 type VisualizerProps = {
     player : Player,
     board : any,
     onClickReplay : any
 }
+
 const Visualizer = ({ board, onClickReplay } : VisualizerProps) => {
-
-
-
-
     return (<div className='flex flex-col items-center justify-center lg:h-[80vh]'>
-
         <div className={`
                 w-full               
                 text-sky-50 
@@ -43,7 +37,6 @@ const Visualizer = ({ board, onClickReplay } : VisualizerProps) => {
                 <h2>{board.filter((cell : any) => cell === Player.X).length}</h2>
             </div>
         </div>
-
         <div className='
             flex 
             justify-center 
@@ -77,8 +70,6 @@ const Visualizer = ({ board, onClickReplay } : VisualizerProps) => {
                     font-mono 
                     rounded-2xl">Replay</button>
         </div>
-        
-        
         <div id="game-container"></div>        
     </div>
     )

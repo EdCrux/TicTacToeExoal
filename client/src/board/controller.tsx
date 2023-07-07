@@ -36,7 +36,7 @@ function useBoard () {
             setBoard(updated);
             setAvailMoves(logic.getAvailableMoves(updated))
             setTimeout(() =>{
-
+                console.time("aiMove")
                 const [newBoard, currentplayer] = aiMove(updated, player)
                 setBoard(newBoard)  
                 const aWinner2 = logic.checkWinner(newBoard)
@@ -44,6 +44,8 @@ function useBoard () {
                     setWinner(aWinner2)
                     return 
                 }
+
+                console.timeEnd("aiMove")
                 setAvailMoves(logic.getAvailableMoves(updated))
                 setDisable(false)
                 setPlayer(currentplayer === Player.X ? Player.O : Player.X)

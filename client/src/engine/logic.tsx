@@ -1,5 +1,5 @@
 import { Player, CellVal, Board, MAX_DEPTH, BOARD_LEN_SIZE, Move } from './model';
-import { prepare_printing_board } from '../board/visualizer';
+import { prepare_printing_board } from '../board/consoles';
 
 
 
@@ -152,21 +152,10 @@ function minimax  (
     beta : number
 ) : Move {
 
-    // console.log(
-    //     'board',board, 
-    //     'player', player, 
-    //     'idx',idx,
-    //     'isMax', isMax,
-    //     'depth', depth
-    // )
-    // console.log('currentidx', idx,'board', prepare_printing_board(board))
-
     const winner = checkWinner(board)
-
     if (
         depth === MAX_DEPTH
     ) {
-        //console.log('MAX_DEPHT REACHED', winner ,'the score',scoreMove(board))
         const score = scoreMove(board)
         // @ts-expect-error
         return { score, idx}

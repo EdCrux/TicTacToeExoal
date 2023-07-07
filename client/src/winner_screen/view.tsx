@@ -15,7 +15,7 @@ const VictoryScreen = (
             <div className="
                 VictoryScreen-box 
                 dark:bg-gradient-to-r from-slate-800 to-slate-900
-                bg-gradient-to-r from-slate-200 to-slate-300
+                bg-gradient-to-r from-slate-100 to-slate-200
                 ">
                 <h2 
                     className="

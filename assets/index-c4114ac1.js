@@ -110,14 +110,14 @@ Error generating stack: `+o.message+`
                     text-gray-100
                     font-mono 
                     rounded-2xl`,children:"Replay"})}),L.jsx("div",{id:"game-container"})]}),Xd=tn.BOARD_LEN_SIZE,Yd=()=>Math.pow(Xd,2),Zu=new Array(Yd()).fill(F.default);function Gd(){const[e,n]=Fe.useState(Zu),[t,r]=Fe.useState(F.X),[l,o]=Fe.useState(F.default),[i,u]=Fe.useState([]),[s,c]=Fe.useState(!1),h=()=>{g()},m=Fe.useCallback(w=>{if(e[w]===""&&!l){const S=[...e];S[w]=t;const j=tn.checkWinner(S);if(j){o(j);return}c(!0),n(S),u(tn.getAvailableMoves(S)),setTimeout(()=>{const[f,a]=p(S,t);n(f);const d=tn.checkWinner(f);if(d){o(d);return}u(tn.getAvailableMoves(S)),c(!1),r(a===F.X?F.O:F.X)},200)}},[e]),p=(w,S)=>{const j=S===F.X?F.O:F.X,{idx:f}=tn.aiMove([...w],j),a=[...w];return typeof f=="number"&&(a[f]=j),[a,j]},g=()=>{r(F.X),n(Zu),o(F.default),c(!1)};return Fe.useEffect(()=>{g()},[]),{player:t,board:e,winner:l,disable:s,availMoves:i,onClickCell:m,onClickReplay:h}}const Zd=({winPlayer:e,onClickReplay:n})=>L.jsx("article",{className:"VictoryScreen",children:L.jsxs("div",{className:`
-                VictoryScreen-box 
-                dark:bg-gradient-to-r from-slate-800 to-slate-900
-                bg-gradient-to-r from-slate-100 to-slate-200
+                VictoryScreen-box
+                bg-slate-100
+                dark:bg-gradient-to-r from-slate-800 to-slate-900 
                 `,children:[L.jsxs("h2",{className:`
                         VictoryScreen-title 
                         mt-6 
                         text-2xl
-                        text-slate-800
+                        text-slate-400
                         dark:bg-white-100
                         text-3xl
                         lg:text-5xl`,children:[e!==F.tie&&"Winner:","  "]}),L.jsx("p",{className:`
@@ -125,6 +125,8 @@ Error generating stack: `+o.message+`
                     text-slate-800 
                     text-5xl
                     font-mono
+                    text-slate-700
+                    dark:text-slate-100
                 `,children:e}),L.jsx("button",{onClick:n,className:`
                         VictoryScreen-replay
                         text-gray-100

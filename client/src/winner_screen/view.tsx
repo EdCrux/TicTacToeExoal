@@ -12,16 +12,16 @@ const VictoryScreen = (
     return(
         <article className="VictoryScreen">
             <div className="
-                VictoryScreen-box 
-                dark:bg-gradient-to-r from-slate-800 to-slate-900
-                bg-gradient-to-r from-slate-100 to-slate-200
+                VictoryScreen-box
+                bg-slate-100
+                dark:bg-gradient-to-r from-slate-800 to-slate-900 
                 ">
                 <h2 
                     className="
                         VictoryScreen-title 
                         mt-6 
                         text-2xl
-                        text-slate-800
+                        text-slate-400
                         dark:bg-white-100
                         text-3xl
                         lg:text-5xl">{winPlayer !== Player.tie && 'Winner:'} &nbsp;</h2>
@@ -30,6 +30,8 @@ const VictoryScreen = (
                     text-slate-800 
                     text-5xl
                     font-mono
+                    text-slate-700
+                    dark:text-slate-100
                 ">{winPlayer}</p>
                 <button 
                     onClick={onClickReplay} 
